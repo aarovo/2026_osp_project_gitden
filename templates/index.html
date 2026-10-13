@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}깃든 마켓{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+<header>
+    <nav aria-label="주 메뉴">
+        <a class="brand" href="{{ url_for('index') }}">깃든 마켓</a>
+        <div class="links">
+            <a href="{{ url_for('product_list.product_list') }}">상품 목록</a>
+            <a href="{{ url_for('reviews.reviews') }}">리뷰 목록</a>
+            <a href="{{ url_for('product_register.reg_items') }}">상품 등록</a>
+            <a href="{{ url_for('reviews.reg_reviews') }}">리뷰 등록</a>
+        </div>
+    </nav>
+</header>
+<main>
+{% block content %}
+    <h1>손으로 만든 작은 취향</h1>
+    <p>대학생 작가들의 핸드메이드 상품을 소개하는 깃든 마켓입니다.</p>
+    <a class="button" href="{{ url_for('product_register.reg_items') }}">상품 등록하기</a>
+{% endblock %}
+</main>
+<footer>깃든 마켓 · Open Software Platform</footer>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+{% block title %}상품 등록 | 깃든 마켓{% endblock %}
+{% block content %}
+<h1>상품 등록</h1>
+<p>판매할 상품의 정보와 사진을 입력하는 화면입니다.</p>
+{# 팀원 1: 아래 폼에 7개 항목과 제출 버튼을 추가한다.
+   name: product_name, seller_id, price, address, status, email, picture
+   status 값: 새 상품 / 거의 새 상품 / 사용감 있음
+   사진: PNG, JPG, WEBP. 전체 요청 크기 최대 5MB.
+#}
+<form action="{{ url_for('product_result.result') }}"
+      method="post" enctype="multipart/form-data">
+    <!-- TODO: 입력 항목과 submit 버튼 -->
+</form>
+{% endblock %}

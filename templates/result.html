@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block title %}등록 결과 | 깃든 마켓{% endblock %}
+{% block content %}
+<h1>등록 결과</h1>
+{% if data %}
+    {# TODO(팀원 2): data의 모든 입력값과 image_url 사진, filename을 출력한다. #}
+{% else %}
+    <p>상품 등록 처리가 아직 준비되지 않았습니다.</p>
+{% endif %}
+{% endblock %}

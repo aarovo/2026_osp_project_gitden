@@ -1,0 +1,14 @@
+* { box-sizing: border-box; }
+body { margin: 0; color: #2c332e; background: #fafbf8; font-family: Arial, "Apple SD Gothic Neo", sans-serif; }
+header { background: white; border-bottom: 1px solid #dde3d9; }
+nav { max-width: 1000px; margin: auto; padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+a { color: inherit; text-decoration: none; }
+.brand { color: #36543a; font-size: 25px; font-weight: bold; }
+.links { display: flex; flex-wrap: wrap; gap: 24px; }
+.links a:hover { text-decoration: underline; }
+main { max-width: 860px; margin: 40px auto; padding: 0 24px; min-height: 480px; }
+h1 { font-size: 30px; }
+p { line-height: 1.7; }
+.button, button[type=submit] { display: inline-block; margin-top: 20px; padding: 12px 22px; border: 0; border-radius: 4px; background: #45613d; color: white; cursor: pointer; }
+footer { text-align: center; border-top: 1px solid #e1e6dc; padding: 22px; color: #75806f; font-size: 12px; }
+@media (max-width: 650px) { nav { flex-direction: column; } .links { gap: 15px; font-size: 14px; } }
