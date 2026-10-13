@@ -2,17 +2,20 @@
 {% block title %}등록 결과 | 깃든 마켓{% endblock %}
 {% block content %}
 <h1>등록 결과</h1>
-{% if data %}
-<p>
-  상품이름 : {{product_name}}
-  판매자 ID : {{seller_id}}
-  가격 : {{price}}
-  주소 : {{address}}
-  상태 : {{status}}
-  이메일 : {{email}}
-</p>
-<image src="{{static/image/}}" alt="상품 이미지" />
-{% else %}
-    <p>상품 등록 처리가 아직 준비되지 않았습니다.</p>
-{% endif %}
+<p>서버로 전송된 상품 정보입니다.</p>
+<section class="result-card">
+    <dl>
+        <dt>상품명</dt><dd>{{ product_name }}</dd>
+        <dt>판매자 ID</dt><dd>{{ seller_id }}</dd>
+        <dt>가격</dt><dd>{{ price }}원</dd>
+        <dt>주소</dt><dd>{{ address }}</dd>
+        <dt>상태</dt><dd>{{ status }}</dd>
+        <dt>이메일</dt><dd>{{ email }}</dd>
+    </dl>
+    <div>
+        <img class="product-photo" src="{{ image_url }}" alt="{{ product_name }}">
+        <p class="filename">사진 파일명: {{ filename }}</p>
+    </div>
+</section>
+<a class="button" href="{{ url_for('product_register.reg_items') }}">다른 상품 등록하기</a>
 {% endblock %}

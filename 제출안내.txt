@@ -1,0 +1,8 @@
+제출 URL
+https://github.com/aarovo/2026_osp_project_gitden
+
+첨부할 파일
+screenshots/product-registration.png
+screenshots/result.png
+
+팀에서 한 번만 제출한다. 코드 ZIP은 보관용이며 과제에서 별도 제출을 요구하지 않는다.

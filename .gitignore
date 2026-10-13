@@ -11,3 +11,6 @@ __pycache__/
 
 # VS Code 설정
 .vscode/
+# 실행 중 업로드한 사진
+static/uploads/
+.DS_Store

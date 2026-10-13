@@ -12,3 +12,13 @@ p { line-height: 1.7; }
 .button, button[type=submit] { display: inline-block; margin-top: 20px; padding: 12px 22px; border: 0; border-radius: 4px; background: #45613d; color: white; cursor: pointer; }
 footer { text-align: center; border-top: 1px solid #e1e6dc; padding: 22px; color: #75806f; font-size: 12px; }
 @media (max-width: 650px) { nav { flex-direction: column; } .links { gap: 15px; font-size: 14px; } }
+
+form, .result-card { background: white; border: 1px solid #dde3d9; border-radius: 6px; padding: 24px; }
+.field { display: grid; grid-template-columns: 190px 1fr; align-items: center; gap: 16px; margin-bottom: 18px; }
+input, select { width: 100%; min-width: 0; padding: 9px; border: 1px solid #bfcab8; border-radius: 3px; font: inherit; }
+input[type=file] { font-size: 14px; }
+.result-card { display: grid; grid-template-columns: 1fr 300px; gap: 30px; }
+dl { margin: 0; } dt { color: #6a7565; font-size: 13px; } dd { margin: 5px 0 18px; overflow-wrap: anywhere; }
+.product-photo { width: 100%; height: 300px; object-fit: contain; background: #f3f3ee; }
+.filename { font-size: 13px; overflow-wrap: anywhere; }
+@media (max-width: 650px) { .field, .result-card { grid-template-columns: 1fr; } .field { gap: 7px; } }
