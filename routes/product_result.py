@@ -4,6 +4,8 @@ from uuid import uuid4
 from flask import Blueprint, current_app, render_template, request, url_for
 from PIL import Image, UnidentifiedImageError
 
+from database import DB
+
 product_result_bp = Blueprint("product_result", __name__)
 
 
@@ -38,6 +40,17 @@ def result():
     # 같은 파일명을 올려도 기존 사진을 덮어쓰지 않는다.
     saved_name = uuid4().hex + extension
     image_file.save(upload_dir / saved_name)
+
+    item_info = {
+        "seller_id": seller_id,
+        "price": int(price),
+        "address": address,
+        "status": status,
+        "email": email,
+        "img_path": "static/uploads/" + saved_name
+    }
+
+    DB.insert_item(product_name, item_info)
 
     return render_template(
         "result.html",
