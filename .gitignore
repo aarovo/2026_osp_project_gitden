@@ -14,3 +14,6 @@ __pycache__/
 # 실행 중 업로드한 사진
 static/uploads/
 .DS_Store
+
+# Firebase Authentication Folder
+authentication/
