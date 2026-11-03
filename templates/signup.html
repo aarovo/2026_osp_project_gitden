@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block title %}회원가입 | 깃든 마켓{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-card" aria-labelledby="auth-title">
+    <h1 id="auth-title">회원가입</h1>
+    <p class="auth-description">깃든 마켓에서 사용할 계정을 만들어 주세요.</p>
+
+    {% if error %}
+    <p class="auth-error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    <form class="auth-form" method="post" action="{{ url_for('auth.signup_post') }}">
+        <div class="form-field">
+            <label for="signup-id">아이디</label>
+            <input id="signup-id" name="id" type="text" autocomplete="username" required>
+        </div>
+        <div class="form-field">
+            <label for="signup-pw">비밀번호</label>
+            <input id="signup-pw" name="pw" type="password" autocomplete="new-password" required>
+        </div>
+        <div class="form-field">
+            <label for="signup-nickname">닉네임 <span>(선택)</span></label>
+            <input id="signup-nickname" name="nickname" type="text" autocomplete="nickname">
+        </div>
+        <button type="submit">가입하기</button>
+    </form>
+
+    <p class="auth-switch">이미 계정이 있으신가요? <a href="{{ url_for('auth.login') }}">로그인</a></p>
+</section>
+{% endblock %}
