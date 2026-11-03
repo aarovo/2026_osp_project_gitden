@@ -4,9 +4,7 @@ from uuid import uuid4
 from flask import Blueprint, current_app, render_template, request, url_for
 from PIL import Image, UnidentifiedImageError
 
-from database import DBhandler
-
-DB = DBhandler()
+from database import DB
 
 product_result_bp = Blueprint("product_result", __name__)
 
@@ -48,38 +46,16 @@ def result():
         "price": int(price),
         "address": address,
         "status": status,
-        "email": email
+        "email": email,
+        "img_path": "static/uploads/" + saved_name
     }
 
-    img_path = "static/uploads/" + saved_name
-
-    try:
-        inserted = DB.insert_item(product_name, item_info, img_path)
-
-        if inserted is False:
-            (upload_dir / saved_name).unlink(missing_ok=True)
-            return render_template(
-                "error.html",
-                message="이미 등록된 상품명입니다."
-            ), 409
-
-    except Exception:
-        current_app.logger.exception("Firebase 상품 저장 실패")
-        (upload_dir / saved_name).unlink(missing_ok=True)
-        return render_template(
-            "error.html",
-            message="상품 저장 중 오류가 발생했습니다. 다시 시도해 주세요."
-        ), 500
+    DB.insert_item(product_name, item_info)
 
     return render_template(
         "result.html",
-        product_name=product_name,
-        seller_id=seller_id,
-        price=price,
-        address=address,
-        status=status,
-        email=email,
+        product_name=product_name, seller_id=seller_id, price=price,
+        address=address, status=status, email=email,
         image_url=url_for("static", filename="uploads/" + saved_name),
         filename=image_file.filename,
     )
-
