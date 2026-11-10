@@ -1,7 +1,47 @@
 {% extends "index.html" %}
 {% block title %}상품 목록 | 깃든 마켓{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='product_list.css') }}">
+{% endblock %}
 {% block content %}
 <h1>상품 목록</h1>
-<p>작가들이 등록한 핸드메이드 상품을 모아 보는 페이지입니다.</p>
-{# 팀원 3: 프로젝트에 맞는 소개나 목록을 구성한다. #}
+<p>작가들이 등록한 핸드메이드 상품을 모아 보는 페이지입니다. (총 {{ total }}개)</p>
+
+{% if items %}
+<ul class="product-grid">
+    {% for name, item in items %}
+    <li class="product-card">
+        {# 사진을 누르면 상세 페이지로 이동 (3번 담당 주소: /view_detail/상품이름) #}
+        <a href="/view_detail/{{ name | urlencode }}">
+            <img src="/{{ item.img_path }}" alt="{{ name }}">
+        </a>
+        <div class="product-info">
+            <p class="product-name">{{ name }}</p>
+            <p class="product-price">{{ "{:,}".format(item.price | int) }}원</p>
+            <p class="product-meta">{{ item.status }} · {{ item.addr }}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+<nav class="pagination" aria-label="페이지">
+    {% if page > 1 %}
+    <a href="{{ url_for('product_list.product_list', page=page - 1) }}">&lt; 이전</a>
+    {% endif %}
+    {% for p in range(1, page_count + 1) %}
+        {% if p == page %}
+        <span class="current">{{ p }}</span>
+        {% else %}
+        <a href="{{ url_for('product_list.product_list', page=p) }}">{{ p }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page < page_count %}
+    <a href="{{ url_for('product_list.product_list', page=page + 1) }}">다음 &gt;</a>
+    {% endif %}
+</nav>
+{% else %}
+<p class="empty">아직 등록된 상품이 없습니다.
+    <a class="button" href="{{ url_for('product_register.reg_items') }}">상품 등록하기</a>
+</p>
+{% endif %}
 {% endblock %}
