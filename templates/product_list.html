@@ -11,9 +11,8 @@
 <ul class="product-grid">
     {% for name, item in items %}
     <li class="product-card">
-        {# 사진을 누르면 상세 페이지로 이동 (3번 담당 주소: /view_detail/상품이름) #}
-        <a href="/view_detail/{{ name | urlencode }}">
-            <img src="/{{ item.img_path }}" alt="{{ name }}">
+        <a href="{{ url_for('product_detail.view_item_detail', name=name) }}">
+            <img src="{{ product_image_url(item.img_path) }}" alt="{{ name }}">
         </a>
         <div class="product-info">
             <p class="product-name">{{ name }}</p>

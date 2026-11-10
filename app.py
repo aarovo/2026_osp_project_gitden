@@ -1,11 +1,13 @@
 import os
 import secrets
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
+from werkzeug.utils import safe_join
 
 from routes.product_register import product_register_bp
 from routes.product_result import product_result_bp
 from routes.product_list import product_list_bp
+from routes.product_detail import product_detail_bp
 from routes.reviews import reviews_bp
 from routes.auth import auth_bp
 
@@ -17,8 +19,19 @@ app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
 app.register_blueprint(product_register_bp)
 app.register_blueprint(product_result_bp)
 app.register_blueprint(product_list_bp)
+app.register_blueprint(product_detail_bp)
 app.register_blueprint(reviews_bp)
 app.register_blueprint(auth_bp)
+
+
+@app.template_global()
+def product_image_url(image_path):
+    if isinstance(image_path, str) and image_path.startswith("static/"):
+        filename = image_path.removeprefix("static/")
+        local_path = safe_join(app.static_folder, filename)
+        if local_path and os.path.isfile(local_path):
+            return url_for("static", filename=filename)
+    return url_for("static", filename="images/product-placeholder.svg")
 
 
 @app.route("/")
