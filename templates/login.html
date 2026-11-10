@@ -14,7 +14,7 @@
     {% with messages = get_flashed_messages(category_filter=["error"]) %}
     {% if messages %}
         <p class="auth-error" role="alert">{{ messages[0] }}</p>
-        <script>alert("{{ messages[0] }}")</script>
+        <script>alert({{ messages[0] | tojson }})</script>
     {% endif %}
     {% endwith %}
 

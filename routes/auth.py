@@ -13,7 +13,8 @@ def login():
     if request.method == "POST":
         user_id = request.form.get("id", "")
         password = request.form.get("pw", "")
-        user = DB.get_user(user_id)
+        valid_id = user_id and not any(char in user_id for char in "/.#$[]")
+        user = DB.get_user(user_id) if valid_id else None
         password_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
         stored_hash = user.get("pw") if user else None
 
