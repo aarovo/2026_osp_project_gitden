@@ -11,8 +11,10 @@ __pycache__/
 
 # VS Code 설정
 .vscode/
-
 .DS_Store
+
+# Keep only the already tracked demo photos; ignore new uploads.
+static/uploads/
 
 # Firebase 인증 키 (절대 올리면 안 됨)
 authentication/
