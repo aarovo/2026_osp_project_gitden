@@ -16,14 +16,8 @@
             <a href="{{ url_for('reviews.reviews') }}">리뷰 목록</a>
             <a href="{{ url_for('product_register.reg_items') }}">상품 등록</a>
             <a href="{{ url_for('reviews.reg_reviews') }}">리뷰 등록</a>
-<<<<<<< HEAD
             {% if session.get('id') %}
             <a href="{{ url_for('auth.logout') }}"><b>Hello, {{ session['id'] }}!</b> 로그아웃</a>
-=======
-            {% if session.get('user_id') %}
-            <span class="nav-user-id">{{ session.get('user_id') }}</span>
-            <button class="nav-logout" type="button" disabled>로그아웃</button>
->>>>>>> 3aa1cf1826974809892450243119270a20f3ec80
             {% else %}
             <a href="{{ url_for('auth.login') }}">로그인</a>
             <a href="{{ url_for('auth.signup') }}">회원가입</a>
