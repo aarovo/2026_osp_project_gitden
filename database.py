@@ -36,6 +36,14 @@ class DBhandler:
         self.db.child("item").child(name).set(item_info)
         return True
 
+    def get_items(self):
+        """등록된 상품 전체를 {상품 이름: 상품 정보} 형태로 반환 (없으면 빈 dict)"""
+        return self.db.child("item").get() or {}
+
+    def get_item_byname(self, name):
+        """상품 이름으로 상품 하나를 반환 (없으면 None)"""
+        return self.db.child("item").child(name).get()
+
     # ---------- 회원 ----------
     def user_duplicate_check(self, id_string):
         """사용 가능한 ID면 True, 이미 있으면 False"""
@@ -53,3 +61,7 @@ class DBhandler:
         }
         self.db.child("user").child(user_id).set(user_info)
         return True
+
+    def get_user(self, id_string):
+        """주어진 ID에 저장된 사용자 정보를 반환하며, 없으면 None을 반환한다."""
+        return self.db.child("user").child(id_string).get()
