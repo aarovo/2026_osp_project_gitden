@@ -1,0 +1,28 @@
+{% extends "index.html" %} {% block title %}상품 상세 | 깃든 마켓{% endblock %}
+{% block content %}
+
+<h1>상품 상세</h1>
+<section class="result-card">
+  <dl>
+    <dt>상품명</dt>
+    <dd>{{ name }}</dd>
+    <dt>판매자 ID</dt>
+    <dd>{{ data.seller }}</dd>
+    <dt>가격</dt>
+    <dd>{{ data.price }}</dd>
+    <dt>주소</dt>
+    <dd>{{ data.addr }}</dd>
+    <dt>상태</dt>
+    <dd>{{ data.status }}</dd>
+    <dt>이메일</dt>
+    <dd>{{ data.email }}</dd>
+  </dl>
+  <div>
+    <img class="product-photo" src="/{{ data.img_path}}" alt="{{ name}}" />
+  </div>
+</section>
+<a class="button" href="{{ url_for('product_list.product_list')  }}"
+  >목록으로</a
+>
+
+{% endblock %}
