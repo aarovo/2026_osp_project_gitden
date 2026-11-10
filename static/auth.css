@@ -21,6 +21,10 @@
 .auth-form {
     display: grid;
     gap: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
 }
 
 .form-field {

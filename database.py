@@ -53,3 +53,7 @@ class DBhandler:
         }
         self.db.child("user").child(user_id).set(user_info)
         return True
+
+    def get_user(self, id_string):
+        """주어진 ID에 저장된 사용자 정보를 반환하며, 없으면 None을 반환한다."""
+        return self.db.child("user").child(id_string).get()

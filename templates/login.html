@@ -11,6 +11,13 @@
     <h1 id="auth-title">로그인</h1>
     <p class="auth-description">깃든 마켓 계정으로 로그인하세요.</p>
 
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+        <p class="auth-error" role="alert">{{ messages[0] }}</p>
+        <script>alert("{{ messages[0] }}")</script>
+    {% endif %}
+    {% endwith %}
+
     {% if error %}
     <p class="auth-error" role="alert">{{ error }}</p>
     {% endif %}

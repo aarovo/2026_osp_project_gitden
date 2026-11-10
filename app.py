@@ -7,6 +7,7 @@ from routes.reviews import reviews_bp
 from routes.auth import auth_bp
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "helloosp"
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
 
 # 공통 담당: 팀원은 routes/의 자기 담당 파일에서 작업한다.
