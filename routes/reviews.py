@@ -17,7 +17,7 @@ def reviews():
     # 팀원 4: 리뷰 목록 화면을 구현한다.
     return render_template("review_list.html")
 
-@reviews_bp.route("/review/<review_id>")
+@reviews_bp.route("/view_review_detail/<review_id>")
 def review_detail(review_id):
     # Firebase에서 해당 리뷰 ID의 데이터 가져오기
     data = DB.get_review_by_id(review_id)
