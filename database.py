@@ -53,7 +53,7 @@ class DBhandler:
             "rating": data["rating"],
             "img_path": img_path
         }
-        self.db.chile("review").push(review_info)
+        self.db.child("review").push(review_info)
         return True
     
     def get_reviews(self):
