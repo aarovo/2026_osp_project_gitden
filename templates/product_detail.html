@@ -1,5 +1,10 @@
 {% extends "index.html" %} {% block title %}상품 상세 | 깃든 마켓{% endblock %}
-{% block content %}
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='product_list.css') }}"
+/>
+{% endblock %} {% block content %}
 
 <h1>상품 상세</h1>
 <section class="result-card">
@@ -28,8 +33,60 @@
 <a class="button" href="{{ url_for('reviews.reg_reviews', name=name) }}"
   >리뷰 등록</a
 >
-<a class="button" href="{{ url_for('product_list.product_list')  }}"
-  >목록으로</a
->
+<div class="action-buttons">
+  <button id="like-button" class="like-button" type="button" disabled></button>
+  <a class="button" href="{{ url_for('product_list.product_list')  }}"
+    >목록으로</a
+  >
+</div>
+<p id="like-message" class="like-message"></p>
+
+<script>
+  const button = document.getElementById("like-button");
+  const message = document.getElementById("like-message");
+  const likeUrl = "{{ url_for('likes.like_item', item_name=name) }}";
+  let liked = false;
+
+  function showLikeState(value) {
+    liked = value;
+    button.textContent = liked ? "♥ 좋아요" : "♡ 좋아요";
+    button.style.color = liked ? "red" : "black";
+  }
+
+  async function loadLikeState() {
+    try {
+      const response = await fetch(likeUrl);
+      if (response.status === 401)
+        throw new Error("로그인 후 좋아요를 사용할 수 있습니다.");
+      if (!response.ok) throw new Error("좋아요 상태를 불러오지 못했습니다.");
+      const data = await response.json();
+      showLikeState(data.liked);
+      button.disabled = false;
+    } catch (error) {
+      button.textContent = "♡ 좋아요";
+      message.textContent = error.message;
+    }
+  }
+  loadLikeState();
+
+  button.addEventListener("click", async function () {
+    button.disabled = true;
+    message.textContent = "";
+    try {
+      const response = await fetch(likeUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ liked: !liked }),
+      });
+      if (!response.ok) throw new Error("저장에 실패했습니다.");
+      const data = await response.json();
+      showLikeState(data.liked);
+    } catch (error) {
+      message.textContent = error.message;
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
 
 {% endblock %}

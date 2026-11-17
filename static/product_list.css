@@ -13,3 +13,10 @@
 .pagination a:hover { border-color: #45613d; }
 .pagination .current { background: #45613d; border-color: #45613d; color: white; font-weight: bold; }
 @media (max-width: 650px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+
+.action-buttons { display: flex; align-items: stretch; gap: 10px; margin-top: 24px; }
+.action-buttons .button, .like-button { width: 120px; margin: 0; padding: 12px 0; text-align: center; }
+.like-button { border: 1px solid #dde3d9; border-radius: 4px; background: white; font: inherit; white-space: nowrap; cursor: pointer; }
+.like-button:hover { border-color: #45613d; }
+.like-button:disabled { opacity: .5; cursor: not-allowed; }
+.like-message { margin: 8px 0 0; font-size: 13px; color: #75806f; }

@@ -10,6 +10,7 @@ from routes.product_list import product_list_bp
 from routes.product_detail import product_detail_bp
 from routes.reviews import reviews_bp
 from routes.auth import auth_bp
+from routes.likes import likes_bp 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
@@ -22,7 +23,7 @@ app.register_blueprint(product_list_bp)
 app.register_blueprint(product_detail_bp)
 app.register_blueprint(reviews_bp)
 app.register_blueprint(auth_bp)
-
+app.register_blueprint(likes_bp) 
 
 @app.template_global()
 def product_image_url(image_path):
@@ -33,10 +34,19 @@ def product_image_url(image_path):
             return url_for("static", filename=filename)
     return url_for("static", filename="images/product-placeholder.svg")
 
+@app.template_global()
+def review_image_url(image_path):
+    if isinstance(image_path, str) and image_path.startswith("static/"):
+        filename = image_path.removeprefix("static/")
+        local_path = safe_join(app.static_folder, filename)
+        if local_path and os.path.isfile(local_path):
+            return url_for("static", filename=filename)
+    return url_for("static", filename="images/product-placeholder.svg")
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 
 @app.errorhandler(413)
