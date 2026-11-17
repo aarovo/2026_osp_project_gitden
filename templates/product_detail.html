@@ -30,11 +30,11 @@
     />
   </div>
 </section>
-<a class="button" href="{{ url_for('reviews.reg_reviews', name=name) }}"
-  >리뷰 등록</a
->
 <div class="action-buttons">
   <button id="like-button" class="like-button" type="button" disabled></button>
+  <a class="button" href="{{ url_for('reviews.reg_reviews', name=name) }}"
+    >리뷰 등록</a
+  >
   <a class="button" href="{{ url_for('product_list.product_list')  }}"
     >목록으로</a
   >
