@@ -65,3 +65,8 @@ class DBhandler:
     def get_user(self, id_string):
         """주어진 ID에 저장된 사용자 정보를 반환하며, 없으면 None을 반환한다."""
         return self.db.child("user").child(id_string).get()
+
+    # ---------- 리뷰 ----------
+    def get_review_by_id(self, review_id):
+        """리뷰 ID로 리뷰 하나를 반환 (없으면 None)"""
+        return self.db.child("review").child(review_id).get()

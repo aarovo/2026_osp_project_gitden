@@ -1,0 +1,34 @@
+{% extends "index.html" %} {% block title %}리뷰 상세 | 깃든 마켓{% endblock %}
+{% block content %}
+
+<h1>리뷰 상세</h1>
+
+<section class="result-card">
+  <h2>{{ data.title }}</h2>
+
+  <dl>
+    <dt>상품명</dt>
+    <dd>{{ data.product_name }}</dd>
+
+    <dt>별점</dt>
+    <dd>
+      {% for i in range(data.rating|int) %} ⭐ {% endfor %} ({{ data.rating
+      }}점)
+    </dd>
+
+    <dt>리뷰 내용</dt>
+    <dd>{{ data.body }}</dd>
+  </dl>
+
+  <div>
+    <img
+      class="product-photo"
+      src="{{ review_image_url(data.photo) }}"
+      alt="{{ data.title }}"
+    />
+  </div>
+</section>
+
+<a class="button" href="{{ url_for('reviews.reviews') }}"> 리뷰 목록으로 </a>
+
+{% endblock %}

@@ -33,6 +33,14 @@ def product_image_url(image_path):
             return url_for("static", filename=filename)
     return url_for("static", filename="images/product-placeholder.svg")
 
+@app.template_global()
+def review_image_url(image_path):
+    if isinstance(image_path, str) and image_path.startswith("static/"):
+        filename = image_path.removeprefix("static/")
+        local_path = safe_join(app.static_folder, filename)
+        if local_path and os.path.isfile(local_path):
+            return url_for("static", filename=filename)
+    return url_for("static", filename="images/product-placeholder.svg")
 
 @app.route("/")
 def index():
