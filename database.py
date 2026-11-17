@@ -71,6 +71,10 @@ class DBhandler:
         """주어진 ID에 저장된 사용자 정보를 반환하며, 없으면 None을 반환한다."""
         return self.db.child("user").child(id_string).get()
 
+    # ---------- 리뷰 ----------
+    def get_review_by_id(self, review_id):
+        """리뷰 ID로 리뷰 하나를 반환 (없으면 None)"""
+        return self.db.child("review").child(review_id).get()
     # ---------- 좋아요 ----------
     def get_heart(self, user_id, item_name):
         """사용자가 해당 상품에 좋아요를 눌렀으면 True, 아니면 False를 반환한다."""
