@@ -22,25 +22,6 @@ def reg_reviews():
 
 @reviews_bp.route("/reviews")
 def reviews():
-    # 팀원 4: 리뷰 목록 화면을 구현한다.
-    return render_template("review_list.html")
-
-@reviews_bp.route("/view_review_detail/<review_id>")
-def review_detail(review_id):
-    # Firebase에서 해당 리뷰 ID의 데이터 가져오기
-    data = DB.get_review_by_id(review_id)
-
-    # 존재하지 않는 리뷰라면 404 처리
-    if data is None:
-        return render_template(
-            "error.html",
-            message="리뷰를 찾을 수 없습니다."
-        ), 404
-
-    return render_template(
-        "review_detail.html",
-        review_id=review_id,
-        data=data
     # 주소의 ?page=2 값을 읽는다. 없거나 잘못된 값이면 1페이지.
     page = request.args.get("page", 1, type=int)
 
@@ -63,4 +44,23 @@ def review_detail(review_id):
         page=page,
         page_count=page_count,
         total=total,
+    )
+
+
+@reviews_bp.route("/view_review_detail/<review_id>")
+def review_detail(review_id):
+    # Firebase에서 해당 리뷰 ID의 데이터 가져오기
+    data = DB.get_review_by_id(review_id)
+
+    # 존재하지 않는 리뷰라면 404 처리
+    if data is None:
+        return render_template(
+            "error.html",
+            message="리뷰를 찾을 수 없습니다."
+        ), 404
+
+    return render_template(
+        "review_detail.html",
+        review_id=review_id,
+        data=data
     )
