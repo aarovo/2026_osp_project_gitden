@@ -44,6 +44,18 @@ class DBhandler:
         """상품 이름으로 상품 하나를 반환 (없으면 None)"""
         return self.db.child("item").child(name).get()
 
+    # ---------- 리뷰 ----------
+    def insert_review(self, data, img_path):
+        review_info = {
+            "product_name": data["product_name"],
+            "title": data["title"],
+            "body": data["body"],
+            "rating": data["rating"],
+            "img_path": img_path
+        }
+        self.db.chile("review").push(review_info)
+        return True
+
     # ---------- 회원 ----------
     def user_duplicate_check(self, id_string):
         """사용 가능한 ID면 True, 이미 있으면 False"""

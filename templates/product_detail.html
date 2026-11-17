@@ -18,9 +18,16 @@
     <dd>{{ data.email }}</dd>
   </dl>
   <div>
-    <img class="product-photo" src="{{ product_image_url(data.img_path) }}" alt="{{ name }}" />
+    <img
+      class="product-photo"
+      src="{{ product_image_url(data.img_path) }}"
+      alt="{{ name }}"
+    />
   </div>
 </section>
+<a class="button" href="{{ url_for('reviews.reg_reviews', name=name) }}"
+  >리뷰 등록</a
+>
 <a class="button" href="{{ url_for('product_list.product_list')  }}"
   >목록으로</a
 >

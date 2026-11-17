@@ -1,0 +1,116 @@
+.review-intro {
+  color: #6a7565;
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+.review-form {
+  padding: 32px;
+}
+
+.review-form .field {
+  margin-bottom: 24px;
+}
+.review-form .field-top {
+  align-items: start;
+}
+.review-form .field-top label {
+  padding-top: 10px;
+}
+
+.review-form label,
+.review-form .field-label {
+  font-weight: 600;
+  color: #36543a;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #bfcab8;
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.review-form textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.6;
+}
+.review-form input[type="text"]:focus,
+.review-form textarea:focus {
+  outline: none;
+  border-color: #45613d;
+  box-shadow: 0 0 0 3px rgba(69, 97, 61, 0.15);
+}
+.review-form input[readonly] {
+  background: #f3f3ee;
+  color: #6a7565;
+}
+
+.review-form input[type="file"] {
+  padding: 8px;
+  border: 1px dashed #bfcab8;
+  border-radius: 6px;
+  background: #fafbf8;
+}
+.review-form input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: #45613d;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* 별점 */
+.rating {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.rating input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+}
+.rating label {
+  font-size: 34px;
+  line-height: 1;
+  color: #d5dccf;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    transform 0.1s;
+}
+.rating label:hover {
+  transform: scale(1.12);
+}
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+  color: #e0a526;
+}
+.rating input:focus-visible + label {
+  outline: 2px solid #45613d;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.form-actions {
+  text-align: right;
+  margin-top: 8px;
+}
+.form-actions button {
+  margin-top: 0;
+  padding: 12px 28px;
+  font-size: 15px;
+}
