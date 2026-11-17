@@ -43,8 +43,19 @@ class DBhandler:
     def get_item_byname(self, name):
         """상품 이름으로 상품 하나를 반환 (없으면 None)"""
         return self.db.child("item").child(name).get()
-    
+
     # ---------- 리뷰 ----------
+    def insert_review(self, data, img_path):
+        review_info = {
+            "product_name": data["product_name"],
+            "title": data["title"],
+            "body": data["body"],
+            "rating": data["rating"],
+            "img_path": img_path
+        }
+        self.db.chile("review").push(review_info)
+        return True
+    
     def get_reviews(self):
         """등록된 리뷰 전체를 {리뷰 ID(자동 생성 키): 리뷰 정보} 형태로 반환 (없으면 빈 dict)"""
         return self.db.child("review").get() or {}
