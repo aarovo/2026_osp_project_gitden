@@ -1,7 +1,57 @@
 {% extends "index.html" %}
 {% block title %}리뷰 목록 | 깃든 마켓{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='review_list.css') }}">
+{% endblock %}
 {% block content %}
 <h1>리뷰 목록</h1>
-<p>구매자들이 남긴 상품 후기를 확인하는 페이지입니다.</p>
-{# 팀원 4: 프로젝트에 맞는 소개나 리뷰 목록을 구성한다. #}
+<p>구매자들이 남긴 상품 후기를 모아 보는 페이지입니다. (총 {{ total }}개)</p>
+
+{% if rows %}
+<div class="review-grid">
+    {% for row in rows %}
+    <div class="review-row">
+        {% for review_id, review in row %}
+        {# 사진 경로: "static/uploads/파일명"이면 그대로, 파일명만 있으면 static/uploads/ 안에서 찾는다. 없으면 기본 이미지 #}
+        {% set img = review.img_path or '' %}
+        {% if not img.startswith('static/') %}{% set img = 'static/uploads/' ~ img %}{% endif %}
+        {% set rating = review.rating | int %}
+        <article class="review-card">
+            <a class="review-photo" href="/view_review_detail/{{ review_id }}">
+                <img src="{{ product_image_url(img) }}" alt="{{ review.title }} 리뷰 사진">
+            </a>
+            <div class="review-info">
+                <p class="review-title">{{ review.title }}</p>
+                <p class="review-product">{{ review.product_name }}</p>
+                <p class="review-rating" aria-label="별점 {{ rating }}점">
+                    <span class="stars">{{ '★' * rating }}<span class="off">{{ '★' * (5 - rating) }}</span></span>
+                    {{ rating }}
+                </p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+<nav class="pagination" aria-label="페이지">
+    {% if page > 1 %}
+    <a href="{{ url_for('reviews.reviews', page=page - 1) }}">&lt; 이전</a>
+    {% endif %}
+    {% for p in range(1, page_count + 1) %}
+        {% if p == page %}
+        <span class="current">{{ p }}</span>
+        {% else %}
+        <a href="{{ url_for('reviews.reviews', page=p) }}">{{ p }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if page < page_count %}
+    <a href="{{ url_for('reviews.reviews', page=page + 1) }}">다음 &gt;</a>
+    {% endif %}
+</nav>
+{% else %}
+<p class="empty">아직 등록된 리뷰가 없습니다.
+    <a class="button" href="{{ url_for('product_list.product_list') }}">상품 보러 가기</a>
+</p>
+{% endif %}
 {% endblock %}

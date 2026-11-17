@@ -43,7 +43,12 @@ class DBhandler:
     def get_item_byname(self, name):
         """상품 이름으로 상품 하나를 반환 (없으면 None)"""
         return self.db.child("item").child(name).get()
-
+    
+    # ---------- 리뷰 ----------
+    def get_reviews(self):
+        """등록된 리뷰 전체를 {리뷰 ID(자동 생성 키): 리뷰 정보} 형태로 반환 (없으면 빈 dict)"""
+        return self.db.child("review").get() or {}
+    
     # ---------- 회원 ----------
     def user_duplicate_check(self, id_string):
         """사용 가능한 ID면 True, 이미 있으면 False"""
