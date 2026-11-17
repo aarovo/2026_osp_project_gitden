@@ -4,6 +4,10 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='product_list.css') }}"
 />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='register_review.css') }}"
+/>
 {% endblock %} {% block content %}
 
 <h1>상품 상세</h1>
@@ -32,7 +36,9 @@
 </section>
 <div class="action-buttons">
   <button id="like-button" class="like-button" type="button" disabled></button>
-  <a class="button" href="{{ url_for('reviews.reg_reviews', name=name) }}"
+  <a
+    class="review-write-btn"
+    href="{{ url_for('reviews.reg_reviews', name=name) }}"
     >리뷰 등록</a
   >
   <a class="button" href="{{ url_for('product_list.product_list')  }}"

@@ -114,3 +114,33 @@
   padding: 12px 28px;
   font-size: 15px;
 }
+
+.review-write-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 12px 22px;
+  border: 1.5px solid #45613d;
+  border-radius: 4px;
+  background: #f1f5ee;
+  color: #45613d;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    transform 0.1s;
+}
+.review-write-btn:hover {
+  background: #45613d;
+  color: #fff;
+}
+.review-write-btn:active {
+  transform: translateY(1px);
+}
+.review-write-btn:focus-visible {
+  outline: 3px solid rgba(69, 97, 61, 0.3);
+  outline-offset: 2px;
+}
