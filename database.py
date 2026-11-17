@@ -43,7 +43,12 @@ class DBhandler:
     def get_item_byname(self, name):
         """상품 이름으로 상품 하나를 반환 (없으면 None)"""
         return self.db.child("item").child(name).get()
-
+    
+    # ---------- 리뷰 ----------
+    def get_reviews(self):
+        """등록된 리뷰 전체를 {리뷰 ID(자동 생성 키): 리뷰 정보} 형태로 반환 (없으면 빈 dict)"""
+        return self.db.child("review").get() or {}
+    
     # ---------- 회원 ----------
     def user_duplicate_check(self, id_string):
         """사용 가능한 ID면 True, 이미 있으면 False"""
@@ -70,3 +75,12 @@ class DBhandler:
     def get_review_by_id(self, review_id):
         """리뷰 ID로 리뷰 하나를 반환 (없으면 None)"""
         return self.db.child("review").child(review_id).get()
+    # ---------- 좋아요 ----------
+    def get_heart(self, user_id, item_name):
+        """사용자가 해당 상품에 좋아요를 눌렀으면 True, 아니면 False를 반환한다."""
+        return bool(self.db.child("heart").child(user_id).child(item_name).get())
+
+    def set_heart(self, user_id, item_name, liked):
+        """좋아요 상태를 저장하고, 저장한 값을 반환한다."""
+        self.db.child("heart").child(user_id).child(item_name).set(bool(liked))
+        return bool(liked)
